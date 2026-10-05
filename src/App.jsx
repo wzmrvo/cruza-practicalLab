@@ -3,6 +3,8 @@ import './App.css'
 import Users from './pages/Users.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
+import UserDetails from './pages/UserDetails.jsx'
+import NotFound from './pages/NotFound.jsx'
 import initialUsers from './data/users.js'
 
 function App() {
@@ -94,27 +96,10 @@ function App() {
         </nav>
       </header>
 
-      {path === '/about' ? (
+      {path === '/' ? (
+        <Home favoriteCount={favoriteCount} onNavigate={navigate} />
+      ) : path === '/about' ? (
         <About onNavigate={navigate} />
-      ) : detailMatch ? (
-        selectedUser ? (
-          <main className="content-page">
-            <a className="text-link" href="/users" onClick={(event) => navigateFromLink(event, '/users')}>
-              ← Back to users
-            </a>
-            <p className="page-eyebrow">User details</p>
-            <h1>{selectedUser.name}</h1>
-            <p><strong>Email:</strong> {selectedUser.email}</p>
-            <p><strong>Company:</strong> {selectedUser.company}</p>
-          </main>
-        ) : (
-          <main className="content-page">
-            <h1>User not found</h1>
-            <a className="text-link" href="/users" onClick={(event) => navigateFromLink(event, '/users')}>
-              Back to users
-            </a>
-          </main>
-        )
       ) : path === '/users' ? (
         <Users
           users={users}
@@ -122,8 +107,10 @@ function App() {
           onClearFavorites={clearFavorites}
           onNavigate={navigate}
         />
+      ) : detailMatch ? (
+        <UserDetails user={selectedUser} onNavigate={navigate} />
       ) : (
-        <Home favoriteCount={favoriteCount} onNavigate={navigate} />
+        <NotFound onNavigate={navigate} />
       )}
     </>
   )

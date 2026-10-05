@@ -1,9 +1,18 @@
 import { useState } from 'react'
 import Button from '../components/Button.jsx'
+import ErrorMessage from '../components/ErrorMessage.jsx'
+import Loader from '../components/Loader.jsx'
 import UserCard from '../components/UserCard.jsx'
 import './Users.css'
 
-function Users({ users, onToggleFavorite, onClearFavorites, onNavigate }) {
+function Users({
+  users,
+  onToggleFavorite,
+  onClearFavorites,
+  onNavigate,
+  isLoading = false,
+  error = null,
+}) {
   const [search, setSearch] = useState('')
   const favoriteCount = users.filter((user) => user.isFavorite).length
   const normalizedSearch = search.trim().toLowerCase()
@@ -43,26 +52,32 @@ function Users({ users, onToggleFavorite, onClearFavorites, onNavigate }) {
         />
       </div>
 
-      <section className="users-list" aria-label="Users">
-        {filteredUsers.length > 0 ? (
-          filteredUsers.map((user) => (
-            <UserCard
-              key={user.id}
-              id={user.id}
-              name={user.name}
-              email={user.email}
-              company={user.company}
-              isFavorite={user.isFavorite}
-              onToggleFavorite={() => onToggleFavorite(user.id)}
-              onNavigate={onNavigate}
-            />
-          ))
-        ) : (
-          <p className="users-empty" role="status">
-            No users match “{search}”.
-          </p>
-        )}
-      </section>
+      {isLoading ? (
+        <Loader message="Loading users..." />
+      ) : error ? (
+        <ErrorMessage message={error} />
+      ) : (
+        <section className="users-list" aria-label="Users">
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((user) => (
+              <UserCard
+                key={user.id}
+                id={user.id}
+                name={user.name}
+                email={user.email}
+                company={user.company}
+                isFavorite={user.isFavorite}
+                onToggleFavorite={() => onToggleFavorite(user.id)}
+                onNavigate={onNavigate}
+              />
+            ))
+          ) : (
+            <p className="users-empty" role="status">
+              No users match “{search}”.
+            </p>
+          )}
+        </section>
+      )}
     </main>
   )
 }
