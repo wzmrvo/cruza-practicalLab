@@ -7,6 +7,7 @@ function UserCard({
   company,
   isFavorite,
   onToggleFavorite,
+  onNavigate,
 }) {
   return (
     <article className="user-card">
@@ -14,7 +15,14 @@ function UserCard({
         <h2>{name}</h2>
         <p>{email}</p>
         <p>{company}</p>
-        <a className="user-card__link" href={`/users/${id}`}>
+        <a
+          className="user-card__link"
+          href={`/users/${id}`}
+          onClick={(event) => {
+            event.preventDefault()
+            onNavigate(`/users/${id}`)
+          }}
+        >
           View Details
         </a>
       </div>
