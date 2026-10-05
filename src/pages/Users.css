@@ -1,0 +1,126 @@
+.users-page {
+  width: min(880px, 100%);
+  margin: 0 auto;
+  padding: 64px 24px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.users-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.users-page__eyebrow {
+  margin-bottom: 4px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.users-page__header h1 {
+  margin: 0;
+}
+
+.users-page__summary {
+  margin-top: 8px;
+}
+
+.users-list {
+  display: grid;
+  gap: 16px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.user-card h2 {
+  margin-bottom: 8px;
+}
+
+.user-card p + p {
+  margin-top: 2px;
+}
+
+.user-card__link {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.user-card__link:hover {
+  text-decoration: underline;
+}
+
+.app-button {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.app-button span + span {
+  margin-left: 6px;
+}
+
+.app-button:focus-visible,
+.user-card__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.app-button--primary {
+  color: #fff;
+  background: var(--accent);
+}
+
+.app-button--primary:hover {
+  background: color-mix(in srgb, var(--accent) 85%, #000);
+}
+
+.app-button--danger {
+  color: #b42318;
+  background: #fff1f0;
+  border-color: #fecdca;
+}
+
+.app-button--danger:hover {
+  background: #fee4e2;
+}
+
+@media (max-width: 600px) {
+  .users-page {
+    padding: 40px 16px;
+  }
+
+  .users-page__header,
+  .user-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
